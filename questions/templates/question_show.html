@@ -1,10 +1,40 @@
 {% extends 'base.html' %}
 {% block body %}
 
+<div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{twoquestion.title}}</h5>
+      <p class="card-text">{{twoquestion.question_a}} VS {{twoquestion.question_b}} </p>
+    </div>
+    <ul class="list-group list-group-flush">
+        <form action="{% url 'questions:answer_question' id=twoquestion.id answer_id=0 %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="{{twoquestion.question_a}}">
+      <li class="list-group-item">{{twoquestion.question_a}}</li>
+        <form action="{% url 'questions:answer_question' id=twoquestion.id answer_id=1%}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="{{twoquestion.question_b}}">
+        </form>
+      <li class="list-group-item">{{twoquestion.question_b}}</li>
+    </ul>
+    <div class="card-body">
+      <a href="#" class="card-link">Card link</a>
+      <a href="#" class="card-link">Another link</a>
+    </div>
+</div>
+
     <p>{{twoquestion.title}}</p>
-    <form action=""></form>
-    <a href="{% url 'questions:random_question' %}">{{twoquestion.question_a}}</a>
-    <a href="{% url 'questions:random_question' %}">{{twoquestion.question_b}}</a>
+    <form action="{% url 'questions:answer_question' id=twoquestion.id answer_id=0 %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="{{twoquestion.question_a}}">
+    </form>
+    <form action="{% url 'questions:answer_question' id=twoquestion.id answer_id=1%}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="{{twoquestion.question_b}}">
+    </form>
+
+  
     
 
 {% endblock %}

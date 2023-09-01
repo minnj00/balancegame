@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block body %}
     {% if user.is_authenticated %}
-        <a href="{% url 'questions:random_question' %}">게임시작</a>
+        <a href="{% url 'questions:random_question' %}" class="btn btn-primary btn-sm">게임시작</a>
+        
     {% endif %}
 {% endblock %}

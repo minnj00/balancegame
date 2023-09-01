@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
 
@@ -13,3 +14,5 @@ class UserAnswer(models.Model):
         (1, '1'),
     ]
     answer = models.PositiveSmallIntegerField(choices=ANSWER_CHOICES)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

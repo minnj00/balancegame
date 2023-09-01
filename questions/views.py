@@ -17,7 +17,7 @@ def question(request,id):
         'twoquestion': twoquestion
     }
 
-    return render(request, 'question_show.html', context)
+    return render(request, 'answer_question.html', context)
 
 @login_required
 def random_question(request):
@@ -30,15 +30,45 @@ def random_question(request):
     return redirect('questions:question_show', id=random_id)
 
 
-def answer_question(request):
+def answer_question(request,id, answer_id):
     if request.method == "POST":
-        answer = request.POST.get('answer')
-        if answer in ['0', '1']:
-            UserAnswer.objects.create(answer=answer)
-            return redirect('some_success_url')  # Redirect to some success page or the same page
+        answer = answer_id
+        question = Question.objects.get(id=id)
+        user = request.user
+        if answer in [0, 1]:
+            UserAnswer.objects.create(answer=answer, question=question, user=user)
+            return redirect('questions:answer_statistics', id=question.id)  # Redirect to some success page or the same page
         else:
             # Handle the error. Maybe display a message to the user.
-            pass
+            twoquestion = question
+        context={
+            'twoquestion': twoquestion,
+        }
+ 
 
-    return render(request, 'answer_question.html')
+    return render(request, 'answer_question.html', context)
+
+
+
+def answer_statistics(request, id):
+    total_answers = UserAnswer.objects.filter(question_id=id).count()
+
+    if total_answers == 0:
+        context = {
+            'percentage_0': 0,
+            'percentage_1': 0
+        }
+    else:
+        count_0 = UserAnswer.objects.filter(question_id=id, answer=0).count()
+        count_1 = UserAnswer.objects.filter(question_id=id, answer=1).count()
+
+        percentage_0 = (count_0 / total_answers) * 100
+        percentage_1 = (count_1 / total_answers) * 100
+
+        context = {
+            'percentage_0': percentage_0,
+            'percentage_1': percentage_1
+        }
+
+    return render(request, 'statistics.html', context)
 

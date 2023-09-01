@@ -1,6 +1,50 @@
-<form method="post">
-    {% csrf_token %}
-    <label for="answer">Please answer with '0' or '1':</label>
-    <input type="text" name="answer" maxlength="1">
-    <input type="submit" value="Submit">
-</form>
+{% extends 'base.html' %}
+{% block body %}
+
+
+<div class="container text-center">
+    <div class="row">
+        <div class="col p-3 mb-2 bg-secondary text-white">
+            {{twoquestion.title}}
+        </div>
+    </div>
+</div>
+
+<div class="container text-center">
+    <div class="row">
+        <div class="col p-3 mb-2 bg-secondary text-white">
+            {{twoquestion.question_a}} VS {{twoquestion.question_b}}
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container text-center">
+    <div class="row">
+      <div id="s_left" class="col p-3 mb-2 bg-dark text-white" style="height: auto; width: 100%; border:1px solid rgb(255, 255, 255);">
+        <form action="{% url 'questions:answer_question' id=twoquestion.id answer_id=0 %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="{{twoquestion.question_a}}" type="text" style="border: 1px solid #000000; padding: 5px; color: rgb(255, 255, 255); background-color: rgb(0, 0, 0);">
+        </form>
+      </div>
+      <div id="s_right"class="col p-3 mb-2 bg-dark text-white" style="height: auto; width: 100%; border:1px solid rgb(255, 255, 255);">
+        <form action="{% url 'questions:answer_question' id=twoquestion.id answer_id=1%}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="{{twoquestion.question_b}}" type="text" style="border: 1px solid #000000; padding: 5px; color: rgb(255, 255, 255); background-color: rgb(0, 0, 0);">
+        </form>
+      </div>
+    </div>
+</div>    
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
