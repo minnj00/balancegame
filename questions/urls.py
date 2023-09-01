@@ -6,5 +6,8 @@ app_name = 'questions'
 
 urlpatterns=[
     path('', views.index, name='index'),
-    path('question/1/', views.question, name='question_show'),
+    path('question/random/', views.random_question, name='random_question'),
+    path('question/<int:id>/', views.question, name='question_show'),
+    path('answer/', views.answer_question, name='answer_question'),
 ]
+

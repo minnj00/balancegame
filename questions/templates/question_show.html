@@ -2,8 +2,9 @@
 {% block body %}
 
     <p>{{twoquestion.title}}</p>
-    <a href="">{{twoquestion.question_a}}</a>
-    <a href="">{{twoquestion.question_b}}</a>
+    <form action=""></form>
+    <a href="{% url 'questions:random_question' %}">{{twoquestion.question_a}}</a>
+    <a href="{% url 'questions:random_question' %}">{{twoquestion.question_b}}</a>
     
 
 {% endblock %}

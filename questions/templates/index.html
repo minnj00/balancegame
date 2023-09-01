@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
 {% block body %}
-    <a href="{% url 'questions:question_show' %}">게임시작</a>
-{% endblock%}
+    {% if user.is_authenticated %}
+        <a href="{% url 'questions:random_question' %}">게임시작</a>
+    {% endif %}
+{% endblock %}

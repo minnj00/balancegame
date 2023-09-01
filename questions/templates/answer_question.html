@@ -1,0 +1,6 @@
+<form method="post">
+    {% csrf_token %}
+    <label for="answer">Please answer with '0' or '1':</label>
+    <input type="text" name="answer" maxlength="1">
+    <input type="submit" value="Submit">
+</form>
