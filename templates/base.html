@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/play.css">
+    <meta charset="UTF-8">
+    <title>밸런스 게임</title>
+</head>
+<body>
+    <header>
+        <div id="header-wrapper">
+            <div id="site-title">
+                <a href="{% url 'questions:index' %}"> 밸런스게임</a>
+            </div>
+        </div>
+        {% block body %}
+        {% endblock %}
+</body>
+</html>
