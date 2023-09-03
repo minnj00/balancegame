@@ -52,9 +52,14 @@ def answer_question(request,id, answer_id):
 
 def answer_statistics(request, id):
     total_answers = UserAnswer.objects.filter(question_id=id).count()
+    questions = Question.objects.get(id=id)
 
     if total_answers == 0:
         context = {
+            'questions': questions,
+            'total_answers': total_answers,
+            'count_0': count_0,
+            'count_1': count_1,
             'percentage_0': 0,
             'percentage_1': 0
         }
@@ -62,10 +67,14 @@ def answer_statistics(request, id):
         count_0 = UserAnswer.objects.filter(question_id=id, answer=0).count()
         count_1 = UserAnswer.objects.filter(question_id=id, answer=1).count()
 
-        percentage_0 = (count_0 / total_answers) * 100
-        percentage_1 = (count_1 / total_answers) * 100
+        percentage_0 = int((count_0 / total_answers) * 100)
+        percentage_1 = int((count_1 / total_answers) * 100)
 
         context = {
+            'questions': questions,
+            'count_0': count_0,
+            'count_1': count_1,
+            'total_answers': total_answers,
             'percentage_0': percentage_0,
             'percentage_1': percentage_1
         }

@@ -1,42 +1,47 @@
 {% extends 'base.html' %}
 {% block body %}
 
-
-<div class="container text-center">
-    <div class="row">
-        <div class="col p-3 mb-2 bg-secondary text-white">
-            {{twoquestion.title}}
+<div style="background-color: #383838; width:1300px; height: 1000px">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col p-3 mb-2 text-white">
+                {{twoquestion.title}}
+            </div>
         </div>
     </div>
-</div>
 
-<div class="container text-center">
-    <div class="row">
-        <div class="col p-3 mb-2 bg-secondary text-white">
-            {{twoquestion.question_a}} VS {{twoquestion.question_b}}
+    <div class="container text-center">
+        <div class="row">
+            <div class="col p-3 mb-2 text-white">
+                {{twoquestion.question_a}} VS {{twoquestion.question_b}}
+            </div>
         </div>
     </div>
+
+
+
+    <div class="container text-center">
+        <div class="row">
+        <div id="s_left" class="col p-3 mb-2 text-white" style="height: 600px; width: 100px; border:1px solid rgb(255, 255, 255);">
+            <form action="{% url 'questions:answer_question' id=twoquestion.id answer_id=0 %}" method="POST">
+                {% csrf_token %}
+                <button type="text" style="width: 600px; height: 585px; color: rgb(255, 255, 255); background-color: #383838;">
+                    {{twoquestion.question_a}}
+                </button>
+        </div>
+        <div id="s_right" class="col p-3 mb-2 text-white" style="height: 600px; width: 100px; border:1px solid rgb(255, 255, 255);">
+            <form action="{% url 'questions:answer_question' id=twoquestion.id answer_id=1%}" method="POST">
+                {% csrf_token %}
+                <button type="text" style="width: 600px; height: 585px; color: rgb(255, 255, 255); background-color: #383838;">
+                    {{twoquestion.question_b}}
+                </button>
+
+
+            </form>
+        </div>
+        </div>
+    </div>    
 </div>
-
-
-
-<div class="container text-center">
-    <div class="row">
-      <div id="s_left" class="col p-3 mb-2 bg-dark text-white" style="height: auto; width: 100%; border:1px solid rgb(255, 255, 255);">
-        <form action="{% url 'questions:answer_question' id=twoquestion.id answer_id=0 %}" method="POST">
-            {% csrf_token %}
-            <input type="submit" value="{{twoquestion.question_a}}" type="text" style="border: 1px solid #000000; padding: 5px; color: rgb(255, 255, 255); background-color: rgb(0, 0, 0);">
-        </form>
-      </div>
-      <div id="s_right"class="col p-3 mb-2 bg-dark text-white" style="height: auto; width: 100%; border:1px solid rgb(255, 255, 255);">
-        <form action="{% url 'questions:answer_question' id=twoquestion.id answer_id=1%}" method="POST">
-            {% csrf_token %}
-            <input type="submit" value="{{twoquestion.question_b}}" type="text" style="border: 1px solid #000000; padding: 5px; color: rgb(255, 255, 255); background-color: rgb(0, 0, 0);">
-        </form>
-      </div>
-    </div>
-</div>    
-
 
 
 
